@@ -9,16 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     
-    var emojis = ["🚗", "🚔", "🚄", "🚟", "🛩", "🛵", "🚲", "🛳", "⛵️", "🚁", "🚆", "🛴", "🏖","🏡","🏢","⛩","🏗","🏛","🕋","🏘","🛣","🌁"]
-    @State var emojiCount = 4
+    var emojis = ["🚗", "🚔", "🚄", "🚟",
+                  "🛩", "🛵", "🚲", "🛳",
+                  "⛵️", "🚁", "🚆", "🛴",
+                  "🏖","🏡","🏢","⛩",
+                  "🏗","🏛","🕋","🏘",
+                  "🛣","🌁","☎️","📟",
+                  "📺","⌛️","📻","🥂",
+                  "🍷","🏈","🍭","⚽️",
+                  "🍼","🥜","🥤","🍫",
+                  "🧂","🍽"]
+    @State var emojiCount = 10
+    
+    var columns = [GridItem(.adaptive(minimum: 80, maximum: 100))]
     
     var body: some View {
         VStack{
-            HStack{
-                ForEach(0..<emojiCount, id: \.self){
-                    CardView(content: emojis[$0])
+            ScrollView{
+                LazyVGrid(columns:columns){
+                    ForEach(0..<emojiCount, id: \.self){
+                        CardView(content: emojis[$0])
+                            .aspectRatio(2/3, contentMode: .fit) // Pour éviter que les cartes soient écrasées
+                    }
                 }
             }
+            Spacer()
             HStack(){
                 addCard // appel de la var addCard
                 Spacer() // Objet qui prend toute la place dispo dans l'axe englobant
