@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     var emojis = ["🚗", "🚔", "🚄", "🚟", "🛩", "🛵", "🚲", "🛳", "⛵️", "🚁", "🚆", "🛴", "🏖","🏡","🏢","⛩","🏗","🏛","🕋","🏘","🛣","🌁"]
-    var emojiCount = 4
+    @State var emojiCount = 4
     
     var body: some View {
         VStack{
@@ -19,24 +19,33 @@ struct ContentView: View {
                     CardView(content: emojis[$0])
                 }
             }
-            HStack{
-                ForEach(0..<emojiCount, id: \.self){
-                    CardView(content: emojis[$0])
-                }
-            }
-            HStack{
-                ForEach(0..<emojiCount, id: \.self){
-                    CardView(content: emojis[$0])
-                }
-            }
-            HStack{
-                ForEach(0..<emojiCount, id: \.self){
-                    CardView(content: emojis[$0])
-                }
+            HStack(){
+                addCard // appel de la var addCard
+                Spacer() // Objet qui prend toute la place dispo dans l'axe englobant
+                removeCard // Appel de la var removeCard
             }
         }
         .padding()
     }
+    
+    var addCard : some View{
+        Button(
+            action: {if emojiCount < emojis.count { emojiCount += 1 } },
+            label: {
+                Image(systemName: "plus.circle")
+                    .font(.largeTitle)
+        })
+    }
+    var removeCard : some View{
+        Button(
+            action: { if emojiCount > 0 {emojiCount -= 1} },
+            label: {
+            Image(systemName: "minus.circle")
+                .font(.largeTitle)
+        })
+    }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -61,9 +70,7 @@ struct CardView : View{
         ZStack{
             if isFaceUp{
                 
-                shape.fill(Color.yellow)
-                
-                shape.strokeBorder(lineWidth: 5, antialiased: true)
+                shape.strokeBorder(lineWidth: 1, antialiased: true)
                 
                 Text(content)
                     .font(.title)
@@ -71,6 +78,7 @@ struct CardView : View{
                 
             }else{
                 shape
+                    .fill()
             }
         }
         .foregroundColor(.red)
@@ -79,3 +87,4 @@ struct CardView : View{
         })
     }
 }
+
