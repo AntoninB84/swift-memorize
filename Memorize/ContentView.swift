@@ -24,43 +24,15 @@ struct ContentView: View {
     var columns = [GridItem(.adaptive(minimum: 80, maximum: 100))]
     
     var body: some View {
-        VStack{
-            ScrollView{
-                LazyVGrid(columns:columns){
-                    ForEach(0..<emojiCount, id: \.self){
-                        CardView(content: emojis[$0])
-                            .aspectRatio(2/3, contentMode: .fit) // Pour éviter que les cartes soient écrasées
-                    }
+        ScrollView{
+            LazyVGrid(columns:columns){
+                ForEach(0..<emojiCount, id: \.self){
+                    CardView(content: emojis[$0])
+                        .aspectRatio(2/3, contentMode: .fit) // Pour éviter que les cartes soient écrasées
                 }
             }
-            Spacer()
-            HStack(){
-                addCard // appel de la var addCard
-                Spacer() // Objet qui prend toute la place dispo dans l'axe englobant
-                removeCard // Appel de la var removeCard
-            }
         }
-        .padding()
     }
-    
-    var addCard : some View{
-        Button(
-            action: {if emojiCount < emojis.count { emojiCount += 1 } },
-            label: {
-                Image(systemName: "plus.circle")
-                    .font(.largeTitle)
-        })
-    }
-    var removeCard : some View{
-        Button(
-            action: { if emojiCount > 0 {emojiCount -= 1} },
-            label: {
-            Image(systemName: "minus.circle")
-                .font(.largeTitle)
-        })
-    }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
