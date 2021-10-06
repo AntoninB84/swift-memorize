@@ -22,7 +22,27 @@ struct MemoryGame<CardContent: Equatable>{
     
     
     
-    var indexOfFirstFaceUpCard : Int?
+    var indexOfFirstFaceUpCard : Int? {
+        get{
+            let faceUpCardsIndices = cards.indices.filter{
+                index in
+                return cards[index].isfaceUp && !cards[index].isMatched
+            }
+            if faceUpCardsIndices.count == 1{
+                return faceUpCardsIndices.first
+            }
+            return nil
+        }
+        set{
+            for index in cards.indices{
+                if index == newValue || cards[index].isMatched{
+                    cards[index].isfaceUp = true
+                }else{
+                    cards[index].isfaceUp = false
+                }
+            }
+        }
+    }
     
     // MARK: - MUTATING
     
@@ -36,16 +56,11 @@ struct MemoryGame<CardContent: Equatable>{
                     cards[chosenIndex].isMatched = true
                     cards[FirstFaceUpCard].isMatched = true
                 }
-                indexOfFirstFaceUpCard = nil
+                cards[chosenIndex].isfaceUp.toggle()
+               
             }else{
-                for index in cards.indices{
-                    if !cards[index].isMatched{
-                        cards[index].isfaceUp = false
-                    }
-                }
                 indexOfFirstFaceUpCard = chosenIndex
             }
-            cards[chosenIndex].isfaceUp.toggle()
         }
         
     }
