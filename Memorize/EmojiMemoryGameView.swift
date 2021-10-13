@@ -29,13 +29,25 @@ struct EmojiMemoryGameView: View {
             }
         }.padding()
         Spacer()
-        Button(action : {game.shuffle()},
-               label : {
-                Text("Shuffle")
-                    .font(.title)
-                    .fontWeight(.bold)
-               }
-        ).padding()
+        HStack{
+            Button(action : {game.shuffle()},
+                   label : {
+                    Text("SHUFFLE")
+                        .font(.title)
+                        .fontWeight(.bold)
+                   }
+            )
+            Spacer()
+            Button(action : {game.restart()},
+                   label : {
+                    Text("RESTART")
+                        .font(.title)
+                        .fontWeight(.bold)
+                   }
+            )
+        }
+        .padding()
+        
     }
 }
 

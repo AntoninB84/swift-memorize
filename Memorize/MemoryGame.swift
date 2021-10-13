@@ -18,8 +18,9 @@ struct MemoryGame<CardContent: Equatable>{
             cards.append(Card(id: pairIndex*2, isfaceUp: false, isMatched: false, content: cardContent))
             cards.append(Card(id: pairIndex*2+1, isfaceUp: false, isMatched: false, content: cardContent))
         }
+        shuffle()
     }
-    
+  
     
     
     private var indexOfFirstFaceUpCard : Int? {
@@ -59,14 +60,19 @@ struct MemoryGame<CardContent: Equatable>{
     mutating func shuffle(){
         cards.shuffle()
     }
+    mutating func restart(){
+        cards.indices.forEach({
+            cards[$0].isMatched = false
+            cards[$0].isfaceUp = false
+        })
+        shuffle()
+    }
     
     struct Card:Identifiable{
         let id: Int
         var isfaceUp : Bool = false
         var isMatched : Bool = false
         let content : CardContent
-        
-        
     }
 }
 
