@@ -60,13 +60,13 @@ struct MemoryGame<CardContent: Equatable>{
     mutating func shuffle(){
         cards.shuffle()
     }
-    mutating func restart(){
+    /*mutating func restart(){
         cards.indices.forEach({
             cards[$0].isMatched = false
             cards[$0].isfaceUp = false
         })
         shuffle()
-    }
+    }*/
     
     struct Card:Identifiable{
         let id: Int

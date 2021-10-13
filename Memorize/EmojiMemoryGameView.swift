@@ -13,7 +13,7 @@ struct EmojiMemoryGameView: View {
 
     var body: some View {
         ScrollView{
-            LazyVGrid(columns:[GridItem(.adaptive(minimum: 80))]){
+            LazyVGrid(columns:[GridItem(.adaptive(minimum: 60))]){
                 ForEach(game.cards){
                     card in CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit) // Pour éviter que les cartes soient écrasées
@@ -30,7 +30,11 @@ struct EmojiMemoryGameView: View {
         }.padding()
         Spacer()
         HStack{
-            Button(action : {game.shuffle()},
+            Button(action : {
+                withAnimation{
+                    game.shuffle()
+                }
+                },
                    label : {
                     Text("SHUFFLE")
                         .font(.title)
@@ -38,7 +42,11 @@ struct EmojiMemoryGameView: View {
                    }
             )
             Spacer()
-            Button(action : {game.restart()},
+            Button(action :{
+                withAnimation{
+                    game.restart()
+                }
+            },
                    label : {
                     Text("RESTART")
                         .font(.title)
