@@ -42,6 +42,8 @@ struct EmojiMemoryGameView: View {
                    }
             )
             Spacer()
+            Text("\(game.score())")
+            Spacer()
             Button(action :{
                 withAnimation{
                     game.restart()

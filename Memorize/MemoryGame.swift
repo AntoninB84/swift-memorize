@@ -9,9 +9,11 @@ import Foundation
 
 struct MemoryGame<CardContent: Equatable>{
     var cards: [Card]
+    var score : Int
     
     init(numberOfPairs: Int, createCardContent:(Int)->CardContent){
         cards = [Card]()
+        score = 0
         
         for pairIndex in 0..<numberOfPairs{
             let cardContent:  CardContent = createCardContent(pairIndex)
@@ -38,6 +40,7 @@ struct MemoryGame<CardContent: Equatable>{
         if let chosenIndex = cards.firstIndex(where: {card.id == $0.id}),
            !cards[chosenIndex].isMatched,
            !cards[chosenIndex].isfaceUp{
+            score += 1
             
             if let FirstFaceUpCard = indexOfFirstFaceUpCard{
                 if cards[chosenIndex].content == cards[FirstFaceUpCard].content{
