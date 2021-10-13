@@ -18,11 +18,24 @@ struct EmojiMemoryGameView: View {
                     card in CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit) // Pour éviter que les cartes soient écrasées
                         .onTapGesture {
-                            game.choose(card)
+                            withAnimation(){
+                                game.choose(card)
+                            }
+                            withAnimation(.default.delay(0.5)){
+                                game.turnDownCardIfNeeded()
+                            }
                         }
                 }
             }
         }.padding()
+        Spacer()
+        Button(action : {game.shuffle()},
+               label : {
+                Text("Shuffle")
+                    .font(.title)
+                    .fontWeight(.bold)
+               }
+        ).padding()
     }
 }
 

@@ -38,5 +38,11 @@ class EmojiMemoryGame : ObservableObject{
     func choose(_ card: Card){
         model.choose(card)
     }
+    func turnDownCardIfNeeded(){
+        model.turnDownCardsIfNeeded()
+    }
+    func shuffle(){
+        model.shuffle()
+    }
     
 }

@@ -16,12 +16,10 @@ struct Cardify : ViewModifier{
         
         ZStack{
             if isFaceUp{
-                
                 shape.strokeBorder(lineWidth: 1, antialiased: true)
-                
+                content
             }else{
-                shape
-                    .fill()
+                shape.fill()
             }
         }
         .foregroundColor(.red)

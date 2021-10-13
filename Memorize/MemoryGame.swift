@@ -49,7 +49,15 @@ struct MemoryGame<CardContent: Equatable>{
                 indexOfFirstFaceUpCard = chosenIndex
             }
         }
-        
+    }
+    
+    mutating func turnDownCardsIfNeeded(){
+        if cards.filter({$0.isfaceUp && !$0.isMatched}).count == 2 {
+            indexOfFirstFaceUpCard = nil
+        }
+    }
+    mutating func shuffle(){
+        cards.shuffle()
     }
     
     struct Card:Identifiable{
