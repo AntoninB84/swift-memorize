@@ -39,25 +39,12 @@ struct ContentView_Previews: PreviewProvider {
 struct CardView : View{
     var card : EmojiMemoryGame.Card
     
-    var shape = RoundedRectangle(cornerRadius: 20)
-    
     var body : some View {
-        ZStack{
-            if card.isfaceUp{
-                
-                shape.strokeBorder(lineWidth: 1, antialiased: true)
-                
-                Text(card.content)
-                    .font(.title)
-                    .fontWeight(.bold)
-                
-            }else{
-                shape
-                    .fill()
-            }
-        }
-        .foregroundColor(.red)
-        .opacity(card.isMatched ? 0 : 1)
+        Text(card.content)
+            .font(.title)
+            .fontWeight(.bold)
+            .cardify(isFaceUp: card.isfaceUp, isMatched: card.isMatched)
+        
     }
 }
 
